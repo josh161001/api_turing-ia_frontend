@@ -33,14 +33,13 @@ const Testimonios = () => {
       {testimonios.map((testimonio, index) => (
         <div className=" rounded-lg  p-6" key={index}>
           <img
-            src={
-              "https://sergiomadrigal.com/wp-content/uploads/2014/01/blog_fisheye.jpg"
-            }
-            alt="Avatar"
             className="rounded-full w-24 h-24 mx-auto mb-4"
+            src={testimonio.imagenes?.url_imagen}
+            crossOrigin="anonymous"
           />
-          <p className="text-sm text-verde italic mb-4">
-            {testimonio.description}
+          <p className="text-lg text-verde italic mb-4">
+            <span className="text-4xl">"</span> {testimonio.description}
+            <span className="text-4xl">"</span>
           </p>
           <p className="text-menta">- {testimonio.name}</p>
         </div>
