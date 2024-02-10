@@ -48,9 +48,7 @@ const PaginaPrincipal = () => {
           <h2 className="text-center text-4xl text-menta text font-semibold pt-16 mt-8 ">
             Nuestro Menu
           </h2>
-          <div className="grid lg:grid-cols-3 gap-4 pt-4 p-4 m-6 grid-cols-1 ">
-            <CardMenu />
-          </div>
+          <CardMenu />
         </main>
 
         <section className="text-center mt-8" id="servicios">

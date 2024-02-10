@@ -80,6 +80,9 @@ const TablaUsuarios = (props) => {
                 Nombre
               </th>
               <th scope="col" className="px-6 py-3">
+                Imagen
+              </th>
+              <th scope="col" className="px-6 py-3">
                 Correo
               </th>
               <th scope="col" className="px-6 py-3">
@@ -87,9 +90,6 @@ const TablaUsuarios = (props) => {
               </th>
               <th scope="col" className="px-6 py-3">
                 Roles
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Imagen
               </th>
 
               <th scope="col" className="px-6 py-3">
@@ -104,18 +104,27 @@ const TablaUsuarios = (props) => {
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <td className="w-4 p-4"></td>
-                <th
+                <td
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
                   {usuario.name}
-                </th>
-                <th
+                </td>
+
+                <td className="px-4 py-4">
+                  <img
+                    src={usuario.imagenes?.url_imagen}
+                    alt="Imagen de perfil"
+                    crossOrigin="anonymous"
+                    className="w-16 h-16 object-cover rounded-full"
+                  />
+                </td>
+                <td
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
                   {usuario.email}
-                </th>
+                </td>
                 <td className="px-6 py-4">
                   <span
                     className={`inline-block px-1 py-1 rounded-lg text-white ${
@@ -126,15 +135,6 @@ const TablaUsuarios = (props) => {
                   </span>
                 </td>
                 <td className="px-6 py-4">{usuario.roles.join(", ")}</td>
-
-                <td className="px-4 py-4">
-                  <img
-                    src={usuario.imagenes?.url_imagen}
-                    alt="Imagen de perfil"
-                    crossOrigin="anonymous"
-                    className="w-16 h-16 object-cover rounded-full"
-                  />
-                </td>
 
                 <td className=" items-center flex pt-9 px-4 py-4 space-x-3">
                   {/* editar */}

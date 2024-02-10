@@ -9,7 +9,7 @@ const MenuComida = ({ name, options }) => {
   };
 
   return (
-    <li className="">
+    <li>
       <button
         type="button"
         className={`flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700`}
@@ -30,7 +30,7 @@ const MenuComida = ({ name, options }) => {
           />
         </svg>
 
-        <span className="flex-1 pr-24 whitespace-nowrap">{name}</span>
+        <span className="flex-1 pr-28 whitespace-nowrap">{name}</span>
         <svg
           className={`w-3 h-3 transition-transform transform ${
             isOpen ? "rotate-180" : ""

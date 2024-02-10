@@ -129,18 +129,18 @@ const TablaComida = (props) => {
                 >
                   {comida.description}
                 </td>
-                <th
+                <td
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
                   ${comida.price}
-                </th>
-                <th
+                </td>
+                <td
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {comida.categories?.name}
-                </th>
+                  {comida.categories?.name || "Sin categoria"}
+                </td>
 
                 <td className=" items-center flex pt-9 px-4 py-4 space-x-3">
                   {/* editar */}
@@ -163,7 +163,6 @@ const TablaComida = (props) => {
                     </svg>
                   </Link>
                   {/* eliminar */}
-
                   <button
                     onClick={() => eliminarComida(comida.id)}
                     className="inline-block px-1 py-1 rounded-lg bg-red-900 font-medium text-red-600 dark:text-red-500 hover:underline"
