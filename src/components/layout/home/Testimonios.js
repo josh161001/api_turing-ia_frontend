@@ -33,7 +33,7 @@ const Testimonios = () => {
       {testimonios.map((testimonio, index) => (
         <div className=" rounded-lg  p-6" key={index}>
           <img
-            className="rounded-full bg-cover bg-center  w-24 h-24 mx-auto mb-4"
+            className="rounded-full bg-cover bg-center bg-no-repeat  w-24 h-24 mx-auto mb-4"
             src={testimonio.imagenes?.url_imagen}
             crossOrigin="anonymous"
           />
