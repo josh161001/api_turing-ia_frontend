@@ -4,25 +4,25 @@ import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../../context/AppContext";
 import Swal from "sweetalert2";
 
-const TablaComida = (props) => {
+const TablaCategorias = (props) => {
   const [auth, guardarAuth] = useContext(AppContext);
 
-  const [comida, guardarComida] = useState([]);
+  const [categoria, guardarCategoria] = useState([]);
   const [paginaActual, setPaginaActual] = useState(1);
   const [usuarioPorPagina] = useState(3);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (auth.access_token !== "") {
-      const consultarComida = async () => {
+      const consultarCategoria = async () => {
         try {
-          const respuesta = await urlAxios.get("/menu", {
+          const respuesta = await urlAxios.get("/categories", {
             headers: {
               Authorization: `Bearer ${auth.access_token}`,
             },
           });
 
-          guardarComida(respuesta.data.menu);
+          guardarCategoria(respuesta.data.categories);
         } catch (error) {
           Swal.fire({
             icon: "error",
@@ -31,16 +31,16 @@ const TablaComida = (props) => {
           });
         }
       };
-      consultarComida();
+      consultarCategoria();
     } else {
       navigate("/");
     }
-  }, [auth.access_token, navigate, comida]);
+  }, [auth.access_token, navigate, categoria]);
 
-  const eliminarComida = async (id) => {
+  const eliminarCategoria = async (id) => {
     Swal.fire({
       title: "¿Estás seguro?",
-      text: "Ya no se podrá recuperar el comida",
+      text: "Ya no se podrá recuperar el categoria",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -49,7 +49,7 @@ const TablaComida = (props) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        urlAxios.delete(`/menu/${id}`, {
+        urlAxios.delete(`/categories/${id}`, {
           headers: {
             Authorization: `Bearer ${auth.access_token}`,
           },
@@ -60,12 +60,12 @@ const TablaComida = (props) => {
 
   const indexDeUltimoUsuario = paginaActual * usuarioPorPagina;
   const indexDelPrimerUsuario = indexDeUltimoUsuario - usuarioPorPagina;
-  const comidaActual = comida.slice(
+  const comidaActual = categoria.slice(
     indexDelPrimerUsuario,
     indexDeUltimoUsuario
   );
 
-  const totalPaginas = Math.ceil(comida.length / usuarioPorPagina);
+  const totalPaginas = Math.ceil(categoria.length / usuarioPorPagina);
 
   const pagina = (numeroDePagina) => {
     if (numeroDePagina >= 1 && numeroDePagina <= totalPaginas) {
@@ -83,18 +83,6 @@ const TablaComida = (props) => {
               <th scope="col" className="px-6 py-3">
                 Nombre
               </th>
-              <th scope="col" className="px-6 py-3">
-                imagen
-              </th>
-              <th scope="col" className="px-6 py-3">
-                description
-              </th>
-              <th scope="col" className="px-6 py-3">
-                price
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Categoria
-              </th>
 
               <th scope="col" className="px-6 py-3">
                 Acción
@@ -102,9 +90,9 @@ const TablaComida = (props) => {
             </tr>
           </thead>
           <tbody>
-            {comidaActual.map((comida, index) => (
+            {comidaActual.map((categoria, index) => (
               <tr
-                key={comida.id}
+                key={categoria.id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <td className="w-4 p-4"></td>
@@ -112,40 +100,13 @@ const TablaComida = (props) => {
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {comida.name}
-                </td>
-                <td className="px-4 py-4">
-                  <img
-                    src={comida.imagenes?.url_imagen}
-                    alt="Imagen de perfil"
-                    crossOrigin="anonymous"
-                    className="w-16 h-16 object-cover rounded-full"
-                  />
+                  {categoria.name}
                 </td>
 
-                <td
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  {comida.description}
-                </td>
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  ${comida.price}
-                </th>
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  {comida.categories.name}
-                </th>
-
-                <td className=" items-center flex pt-9 px-4 py-4 space-x-3">
+                <td className=" items-center flex pt-7 px-4 py-4 space-x-3">
                   {/* editar */}
                   <Link
-                    to={`/admin/menu/${comida.id}`}
+                    to={`/admin/categoria/${categoria.id}`}
                     className="inline-block px-1 py-1 rounded-lg bg-blue-900  font-medium text-red-600 dark:text-blue-500 hover:underline"
                   >
                     <svg
@@ -165,7 +126,7 @@ const TablaComida = (props) => {
                   {/* eliminar */}
 
                   <button
-                    onClick={() => eliminarComida(comida.id)}
+                    onClick={() => eliminarCategoria(categoria.id)}
                     className="inline-block px-1 py-1 rounded-lg bg-red-900 font-medium text-red-600 dark:text-red-500 hover:underline"
                   >
                     <svg
@@ -207,4 +168,4 @@ const TablaComida = (props) => {
   );
 };
 
-export default TablaComida;
+export default TablaCategorias;

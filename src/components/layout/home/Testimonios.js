@@ -20,7 +20,6 @@ const Testimonios = () => {
             },
           });
           guardarTestimonios(respuesta.data.testimonies);
-          console.log(respuesta.data);
         } catch (error) {
           navigate("/");
         }
@@ -32,9 +31,11 @@ const Testimonios = () => {
   return (
     <>
       {testimonios.map((testimonio, index) => (
-        <div className=" rounded-lg  p-6">
+        <div className=" rounded-lg  p-6" key={index}>
           <img
-            src="https://sergiomadrigal.com/wp-content/uploads/2014/01/blog_fisheye.jpg"
+            src={
+              "https://sergiomadrigal.com/wp-content/uploads/2014/01/blog_fisheye.jpg"
+            }
             alt="Avatar"
             className="rounded-full w-24 h-24 mx-auto mb-4"
           />

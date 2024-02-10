@@ -4,25 +4,25 @@ import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../../context/AppContext";
 import Swal from "sweetalert2";
 
-const TablaComida = (props) => {
+const TablaTestimonios = (props) => {
   const [auth, guardarAuth] = useContext(AppContext);
 
-  const [comida, guardarComida] = useState([]);
+  const [testimonio, guardarTestimonio] = useState([]);
   const [paginaActual, setPaginaActual] = useState(1);
-  const [usuarioPorPagina] = useState(3);
+  const [testimonioPorPagina] = useState(3);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (auth.access_token !== "") {
-      const consultarComida = async () => {
+      const consultarTestimonio = async () => {
         try {
-          const respuesta = await urlAxios.get("/menu", {
+          const respuesta = await urlAxios.get("/testimonies", {
             headers: {
               Authorization: `Bearer ${auth.access_token}`,
             },
           });
 
-          guardarComida(respuesta.data.menu);
+          guardarTestimonio(respuesta.data.testimonies);
         } catch (error) {
           Swal.fire({
             icon: "error",
@@ -31,16 +31,16 @@ const TablaComida = (props) => {
           });
         }
       };
-      consultarComida();
+      consultarTestimonio();
     } else {
       navigate("/");
     }
-  }, [auth.access_token, navigate, comida]);
+  }, [auth.access_token, navigate, testimonio]);
 
-  const eliminarComida = async (id) => {
+  const eliminarTestimonio = async (id) => {
     Swal.fire({
       title: "¿Estás seguro?",
-      text: "Ya no se podrá recuperar el comida",
+      text: "Ya no se podrá recuperar el testimonio",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -49,7 +49,7 @@ const TablaComida = (props) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        urlAxios.delete(`/menu/${id}`, {
+        urlAxios.delete(`/testimonies/${id}`, {
           headers: {
             Authorization: `Bearer ${auth.access_token}`,
           },
@@ -58,14 +58,14 @@ const TablaComida = (props) => {
     });
   };
 
-  const indexDeUltimoUsuario = paginaActual * usuarioPorPagina;
-  const indexDelPrimerUsuario = indexDeUltimoUsuario - usuarioPorPagina;
-  const comidaActual = comida.slice(
+  const indexDeUltimoUsuario = paginaActual * testimonioPorPagina;
+  const indexDelPrimerUsuario = indexDeUltimoUsuario - testimonioPorPagina;
+  const comidaActual = testimonio.slice(
     indexDelPrimerUsuario,
     indexDeUltimoUsuario
   );
 
-  const totalPaginas = Math.ceil(comida.length / usuarioPorPagina);
+  const totalPaginas = Math.ceil(testimonio.length / testimonioPorPagina);
 
   const pagina = (numeroDePagina) => {
     if (numeroDePagina >= 1 && numeroDePagina <= totalPaginas) {
@@ -89,12 +89,6 @@ const TablaComida = (props) => {
               <th scope="col" className="px-6 py-3">
                 description
               </th>
-              <th scope="col" className="px-6 py-3">
-                price
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Categoria
-              </th>
 
               <th scope="col" className="px-6 py-3">
                 Acción
@@ -102,9 +96,9 @@ const TablaComida = (props) => {
             </tr>
           </thead>
           <tbody>
-            {comidaActual.map((comida, index) => (
+            {comidaActual.map((testimonio, index) => (
               <tr
-                key={comida.id}
+                key={testimonio.id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <td className="w-4 p-4"></td>
@@ -112,11 +106,11 @@ const TablaComida = (props) => {
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {comida.name}
+                  {testimonio.name}
                 </td>
                 <td className="px-4 py-4">
                   <img
-                    src={comida.imagenes?.url_imagen}
+                    src={testimonio.imagenes?.url_imagen}
                     alt="Imagen de perfil"
                     crossOrigin="anonymous"
                     className="w-16 h-16 object-cover rounded-full"
@@ -127,25 +121,13 @@ const TablaComida = (props) => {
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {comida.description}
+                  {testimonio.description}
                 </td>
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  ${comida.price}
-                </th>
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  {comida.categories.name}
-                </th>
 
                 <td className=" items-center flex pt-9 px-4 py-4 space-x-3">
                   {/* editar */}
                   <Link
-                    to={`/admin/menu/${comida.id}`}
+                    to={`/admin/testimonio/${testimonio.id}`}
                     className="inline-block px-1 py-1 rounded-lg bg-blue-900  font-medium text-red-600 dark:text-blue-500 hover:underline"
                   >
                     <svg
@@ -165,7 +147,7 @@ const TablaComida = (props) => {
                   {/* eliminar */}
 
                   <button
-                    onClick={() => eliminarComida(comida.id)}
+                    onClick={() => eliminarTestimonio(testimonio.id)}
                     className="inline-block px-1 py-1 rounded-lg bg-red-900 font-medium text-red-600 dark:text-red-500 hover:underline"
                   >
                     <svg
@@ -207,4 +189,4 @@ const TablaComida = (props) => {
   );
 };
 
-export default TablaComida;
+export default TablaTestimonios;

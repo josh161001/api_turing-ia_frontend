@@ -28,22 +28,22 @@ const FooterHome = () => {
             <p className="text-menta font-bold tracking-wide">Menú</p>
             <ul className="list-none">
               <li className="mb-2">
-                <Link to="/tecnl/pagina-principal" className="text-gray-300 ">
+                <Link to="#" className="text-gray-300 ">
                   Principal
                 </Link>
               </li>
               <li className="mb-2">
-                <Link to="/tecnl/eventos" className="text-gray-300 ">
+                <Link to="#" className="text-gray-300 ">
                   Menu
                 </Link>
               </li>
               <li className="mb-2">
-                <Link to="/tecnl/Servicios" className="text-gray-300 ">
+                <Link to="#" className="text-gray-300 ">
                   Servicios
                 </Link>
               </li>
               <li className="mb-2">
-                <Link to="/tecnl/Testimonios" className="text-gray-300 ">
+                <Link to="#" className="text-gray-300 ">
                   Testimonios
                 </Link>
               </li>
@@ -57,22 +57,22 @@ const FooterHome = () => {
             </p>
             <ul className="list-none">
               <li className="mb-2">
-                <Link to="/tecnl/pagina-principal" className="text-gray-300 ">
+                <Link to="#" className="text-gray-300 ">
                   Principal
                 </Link>
               </li>
               <li className="mb-2">
-                <Link to="/tecnl/eventos" className="text-gray-300 ">
+                <Link to="#" className="text-gray-300 ">
                   Menu
                 </Link>
               </li>
               <li className="mb-2">
-                <Link to="/tecnl/Servicios" className="text-gray-300 ">
+                <Link to="#" className="text-gray-300 ">
                   Servicios
                 </Link>
               </li>
               <li className="mb-2">
-                <Link to="/tecnl/Testimonios" className="text-gray-300 ">
+                <Link to="#" className="text-gray-300 ">
                   Testimonios
                 </Link>
               </li>
@@ -86,22 +86,22 @@ const FooterHome = () => {
             </p>
             <ul className="list-none">
               <li className="mb-2">
-                <Link to="/tecnl/pagina-principal" className="text-gray-300 ">
+                <Link to="#" className="text-gray-300 ">
                   Principal
                 </Link>
               </li>
               <li className="mb-2">
-                <Link to="/tecnl/eventos" className="text-gray-300 ">
+                <Link to="#" className="text-gray-300 ">
                   Menu
                 </Link>
               </li>
               <li className="mb-2">
-                <Link to="/tecnl/Servicios" className="text-gray-300 ">
+                <Link to="#" className="text-gray-300 ">
                   Servicios
                 </Link>
               </li>
               <li className="mb-2">
-                <Link to="/tecnl/Testimonios" className="text-gray-300 ">
+                <Link to="#" className="text-gray-300 ">
                   Testimonios
                 </Link>
               </li>

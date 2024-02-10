@@ -21,6 +21,7 @@ const TablaUsuarios = (props) => {
               Authorization: `Bearer ${auth.access_token}`,
             },
           });
+
           guardarUsuarios(respuesta.data.data);
         } catch (error) {
           navigate("/");
@@ -124,13 +125,13 @@ const TablaUsuarios = (props) => {
                     {usuario.status ? "Activo" : "Inactivo"}
                   </span>
                 </td>
-
                 <td className="px-6 py-4">{usuario.roles.join(", ")}</td>
 
                 <td className="px-4 py-4">
                   <img
                     src={usuario.imagenes?.url_imagen}
                     alt="Imagen de perfil"
+                    crossOrigin="anonymous"
                     className="w-16 h-16 object-cover rounded-full"
                   />
                 </td>
@@ -138,7 +139,7 @@ const TablaUsuarios = (props) => {
                 <td className=" items-center flex pt-9 px-4 py-4 space-x-3">
                   {/* editar */}
                   <Link
-                    to={`/admin/usuario/${usuario.id}`}
+                    to={`/admin/${usuario.id}`}
                     className="inline-block px-1 py-1 rounded-lg bg-blue-900  font-medium text-red-600 dark:text-blue-500 hover:underline"
                   >
                     <svg

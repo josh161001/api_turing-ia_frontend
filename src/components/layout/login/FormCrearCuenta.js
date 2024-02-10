@@ -1,15 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import urlAxios from "../../../config/axios";
-import { AppContext } from "../../../context/AppContext";
 
-const FormLogin = () => {
+const FormCrearCuenta = () => {
   //utilizar context
-  const [auth, guardarAuth] = useContext(AppContext);
 
   //state credenciales
   const [credencialesUsuario, guardarCredencialesUsuario] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -26,41 +25,26 @@ const FormLogin = () => {
 
   //funcion para validar que no haya campos vacios
   const validarCredencialesUsuario = () => {
-    const { email, password } = credencialesUsuario;
-    return !email.length || !password.length;
+    const { email, password, name } = credencialesUsuario;
+    return !email.length || !password.length || !name.length;
   };
 
   //funcion para iniciar sesion en el servidor
-  const iniciarSesion = async (e) => {
+  const CrearCuentaUsuario = async (e) => {
     e.preventDefault();
 
     //validar usuario
     try {
-      const respuesta = await urlAxios.post("/auth/login", credencialesUsuario);
-      const { access_token, status, roles } = respuesta.data.data;
-
-      //guardar token en localstorage
-      localStorage.setItem("access_token", access_token);
-
-      //guardar token en el state
-      guardarAuth({
-        access_token,
-        auth: true,
-      });
+      const respuesta = await urlAxios.post("/users", credencialesUsuario);
 
       swal({
         icon: "success",
-        title: "Inicio de sesión exitoso",
-        text: "Bienvenido a la App",
+        title: "Cuenta creada correctamente",
+        text: "Confirma tu correo para iniciar sesión",
       });
 
-      status === true
-        ? roles.includes("ADMIN")
-          ? navigate("/admin")
-          : roles.includes("USER")
-          ? navigate("/pagina-principal")
-          : navigate("/pagina-principal")
-        : swal("Inicio de sesión fallido", "Usuario inactivo", "error");
+      //redirigir al usuario
+      navigate("/");
 
       //guardar token en localstorage
     } catch (error) {
@@ -73,7 +57,17 @@ const FormLogin = () => {
   };
 
   return (
-    <form className="mt-4" onSubmit={iniciarSesion}>
+    <form className="mt-4" onSubmit={CrearCuentaUsuario}>
+      <div className="mb-3">
+        <label className="mb-2 block text-xs font-semibold">Nombre</label>
+        <input
+          name="name"
+          type="text"
+          placeholder="Tu nombre..."
+          className="block w-full rounded-md border border-gray-300 focus:border-menta focus:outline-none focus:ring-1 focus:ring-menta py-1 px-1.5 text-gray-500"
+          onChange={credencialesUsuarioState}
+        />
+      </div>
       <div className="mb-3">
         <label className="mb-2 block text-xs font-semibold">Correo</label>
         <input
@@ -103,11 +97,8 @@ const FormLogin = () => {
         </NavLink>
       </div>
       <div className="mb-3 flex flex-wrap content-center">
-        <NavLink
-          to="/crear-cuenta"
-          className="text-xs font-semibold text-verde"
-        >
-          ¿No tienes cuenta?
+        <NavLink to="/" className="text-xs font-semibold text-verde">
+          ¿Ya tienes cuenta?
         </NavLink>
       </div>
       <div className="mb-3 flex gap-2">
@@ -117,11 +108,11 @@ const FormLogin = () => {
             validarCredencialesUsuario() ? "bg-menta " : "bg-verde"
           }`}
         >
-          Iniciar Sesión
+          Crear Cuenta
         </button>
       </div>
     </form>
   );
 };
 
-export default FormLogin;
+export default FormCrearCuenta;
