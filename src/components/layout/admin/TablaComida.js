@@ -104,7 +104,7 @@ const TablaComida = (props) => {
           <tbody>
             {comidaActual.map((comida, index) => (
               <tr
-                key={comida.id}
+                key={comida?.id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <td className="w-4 p-4"></td>
@@ -112,7 +112,7 @@ const TablaComida = (props) => {
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {comida.name}
+                  {comida?.name}
                 </td>
                 <td className="px-4 py-4">
                   <img
@@ -139,7 +139,7 @@ const TablaComida = (props) => {
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {comida.categories.name}
+                  {comida.categories?.name}
                 </th>
 
                 <td className=" items-center flex pt-9 px-4 py-4 space-x-3">
